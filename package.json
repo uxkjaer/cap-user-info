@@ -3,6 +3,19 @@
   "version": "0.1.0",
   "description": "CDS plugin: track created/modified user details on managed entities",
   "main": "cds-plugin.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/cap-user-info.git"
+  },
+  "keywords": [
+    "cds",
+    "cap",
+    "plugin",
+    "user-info",
+    "created-by",
+    "modified-by"
+  ],
+  "author": "Jakob Kjaer",
   "files": [
     "cds-plugin.js",
     "db/",

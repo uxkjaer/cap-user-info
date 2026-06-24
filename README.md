@@ -29,6 +29,8 @@ associations `_toCreatedUserInfo` / `_toModifiedUserInfo` resolve via
 `UserTracked` extends `managed`, so consuming entities automatically
 inherit `createdBy` / `modifiedBy` (and the corresponding timestamps):
 
+It will add a quickview to the createdBy and modifiedBy to show the user details. The details are stored from the req.user upon changes to the entity.
+![alt text](image.png)
 ```cds
 aspect UserTracked : managed { ... }
 ```
