@@ -1,0 +1,13 @@
+{
+  "name": "cap-user-info-test-fixture",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "cap-user-info": "*"
+  },
+  "cds": {
+    "requires": {
+      "db": { "kind": "sqlite", "credentials": { "url": ":memory:" } }
+    }
+  }
+}
