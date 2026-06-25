@@ -1,7 +1,8 @@
-using { managed } from '@sap/cds/common';
+using {managed} from '@sap/cds/common';
+
 namespace cap.userinfo;
 
-@UI.FieldGroup #contactDetails: {Data: [
+@UI.FieldGroup     : {Data: [
     {
         $Type: 'UI.DataField',
         Value: GivenName,
@@ -15,14 +16,14 @@ namespace cap.userinfo;
         Value: Email,
     }
 ]}
-@UI.QuickViewFacets         : [{
+@UI.QuickViewFacets: [{
     $Type : 'UI.ReferenceFacet',
-    Target: '@UI.FieldGroup#contactDetails',
+    Target: '@UI.FieldGroup',
     Label : 'Contact Details',
 }]
-@UI.HeaderInfo              : {
+@UI.HeaderInfo     : {
     ImageUrl    : '',
-    TypeImageUrl: 'sap-icon://customer',
+    TypeImageUrl: 'sap-icon://avatar',
     Title       : {
         Label: 'Name',
         Value: FullName,
@@ -47,7 +48,7 @@ entity UserInfo {
 
 aspect UserTracked : managed {
     _toCreatedUserInfo  : Association to one UserInfo
-                            on _toCreatedUserInfo.ID = $self.createdBy;
+                              on _toCreatedUserInfo.ID = $self.createdBy;
     _toModifiedUserInfo : Association to one UserInfo
-                            on _toModifiedUserInfo.ID = $self.modifiedBy;
+                              on _toModifiedUserInfo.ID = $self.modifiedBy;
 }

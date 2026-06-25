@@ -37,3 +37,61 @@ aspect UserTracked : managed { ... }
 
 This means no extra `managed` declaration is required on the consuming
 entity — including `UserTracked` is enough.
+
+
+## Extending the quickview
+
+You can extend the UserInfo to add more data into the quickview by adding to the fieldgroup in a cds file.
+
+``` cds
+  // Change the quickview
+extend cap.userinfo.UserInfo with
+  @UI.FieldGroup: {Data: [
+    // Leave the original properties
+    {
+      $Type: 'UI.DataField',
+      Value: GivenName
+    },
+    {
+      $Type: 'UI.DataField',
+      Value: FamilyName
+    },
+    {
+      $Type: 'UI.DataField',
+      Value: Email
+    },
+    // your new field
+    {
+      $Type: 'UI.DataField',
+      Value: Department
+    }, 
+  ]}
+
+  //Change the 
+  @UI.HeaderInfo     : {
+    ImageUrl    : '',
+    TypeImageUrl: 'sap-icon://employee',
+    Title       : {
+        Value: FullName,
+    },
+    TypeName    : '',
+}
+  {
+    // your new field iin the entity
+    Department : String @title                        : 'Department';
+  }
+```
+
+Then register your event handler to populate the data. It's important this piece of code isn't added within your srv.init method. It needs to be in the root context.
+``` javascript
+cds.on("served", () => {
+  const { db } = cds.services;
+  const { UserInfo } = cds.entities("cap.userinfo");
+
+  //Register the handler for the Upsert
+  db.before("UPSERT", UserInfo, async (req) => {
+    //Change the data
+    req.data.Department = "Admin";
+  });
+});
+```
